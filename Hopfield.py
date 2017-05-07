@@ -21,12 +21,28 @@ def numpyVectorInList(vector, list):
 
   value = False
 
+  #print ("\n>>In Vector!!")
+
   for v in list:
+    #print (v)
+    #print (vector)
     if np.array_equal(vector,v):
       value = True
       break
-
+    #print()
+  #print(">>",value)
   return value
+
+
+def removearray(L,arr):
+  ind = 0
+  size = len(L)
+  while ind != size and not np.array_equal(L[ind],arr):
+    ind += 1
+  if ind != size:
+    L.pop(ind)
+  else:
+    raise ValueError('array not found in list.')
 
 def stabilityCheck(weight, vector, name, maxIteration):
   
@@ -136,6 +152,7 @@ def Debug():
   lstVector.append(v2)
   lstVector.append(v3)
   #lstVector.append(v4)
+  lstOriginalVector = lstVector
   print (lstVector)
   weight = calculateWeight(lstVector)
   
@@ -150,18 +167,23 @@ def Debug():
     stbTest = stabilityCheck( weight,v, name, maxIteration )
     count += 1
 
+    #lstOriginalVector.remove(v)
+
     if stbTest == None:
       print (name, "is not stable after" , maxIteration, " iteration !!!")
     elif np.array_equal(v,stbTest):
       print (name, "is stalbe. It is equal with vector.")
       print (stbTest)
-    elif numpyVectorInList(v,lstVector):
+    elif numpyVectorInList(stbTest,lstOriginalVector) == True:
       print (name, "is stable. It is same with another vector that is given.")
-      print (stbTest)
-      
+      print (v)
+      print (lstOriginalVector)
+
     else:
       print (name, "is stable. It is not same with vector or another vector. During the test there was another vector during the test")
       print (stbTest)
+
+    #lstOriginalVector.append(v)
 
 ###### MAIN FUNCTION ######
 
