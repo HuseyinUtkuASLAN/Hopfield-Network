@@ -19,6 +19,3 @@ To start tests:
     python3 main.py
     
     
-
-For further more information check
-    http://web.cs.ucla.edu/~rosen/161/notes/hopfield.html
